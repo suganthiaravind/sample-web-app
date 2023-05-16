@@ -14,7 +14,10 @@ pipeline{
                   steps{
                       script{
 			      withSonarQubeEnv('demo') { 
-			      sh "mvn clean sonar:sonar"
+			      sh "mvn sonar:sonar \
+ 					 -Dsonar.projectKey=demo \
+					  -Dsonar.host.url=http://54.174.121.17:9000 \
+					  -Dsonar.login=dfdb5465652d729babebb76bf934a1ba8651de38"
                        	     	}
 			      timeout(time: 1, unit: 'HOURS') {
 			      def qg = waitForQualityGate()
